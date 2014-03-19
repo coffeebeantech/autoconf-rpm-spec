@@ -1,28 +1,25 @@
-%define _buildid .7
-
 Summary:    A GNU tool for automatically configuring source code
 Name:       autoconf
-Version:    2.63
-Release: 5.1%{?_buildid}%{?dist}
+Version:    2.69
+Release:    1%{?dist}
 License:    GPLv3+ and GFDL
 Group:      Development/Tools
 Source:     http://ftp.gnu.org/gnu/autoconf/autoconf-%{version}.tar.bz2
-Source1:    filter-provides-automake.sh
-Source2:    filter-requires-automake.sh
-# Fix for #556223
-Patch0:     autoconf-erlang_fix.diff
 URL:        http://www.gnu.org/software/autoconf/
-BuildRequires:      m4 >= 1.4.7, emacs
-Requires:           m4 >= 1.4.7
-Requires(post):     /sbin/install-info
-Requires(preun):    /sbin/install-info
-BuildArch: noarch
+BuildArch:  noarch
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+# m4 >= 1.4.6 is required, >= 1.4.14 is recommended:
+BuildRequires:      m4 >= 1.4.6
+Requires:           m4 >= 1.4.6
+BuildRequires:      emacs
+
+Requires(post):     /sbin/install-info
+Requires(preun):    /sbin/install-info
+
 # filter out bogus perl(Autom4te*) dependencies
-%define _use_internal_dependency_generator 0
-%define __find_provides %{SOURCE1}
-%define __find_requires %{SOURCE2}
+%global __requires_exclude %{?__requires_exclude:%__requires_exclude|}^perl\\(Autom4te::
+%global __provides_exclude %{?__provides_exclude:%__provides_exclude|}^perl\\(Autom4te::
 
 %description
 GNU Autoconf is a tool for configuring source code and Makefiles.
@@ -42,7 +39,6 @@ their use.
 
 %prep
 %setup -q
-%patch0 -p1 -b .erlang
 
 %build
 # use ./configure here to avoid copying config.{sub,guess} with those from the
@@ -84,6 +80,9 @@ fi
 %doc AUTHORS COPYING ChangeLog NEWS README THANKS TODO
 
 %changelog
+* Wed Mar 19 2014 13:47:37 UTC Renato Neves <renato.neves@coffeebeantech.com>
+- update autoconf version to 2.69
+
 * Mon Jul 12 2010 19:09:47 UTC Cristian Gafton <gafton@amazon.com>
 - rebuild against new libtool/automake
 
