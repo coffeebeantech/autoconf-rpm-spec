@@ -26,3 +26,9 @@ To upgrade an existing autoconf installation:
 
     sudo rpm -Uvh /home/ec2-user/packaging/autoconf/RPMS/noarch/autoconf-2.69-1.amzn1.noarch.rpm
 
+# Sources
+
+This spec is based on Fedora's spec available on http://pkgs.fedoraproject.org/cgit/autoconf.git/.
+
+Also, it has been used the spec of the latest autoconf rpm available on Amazon's repositories.
+
