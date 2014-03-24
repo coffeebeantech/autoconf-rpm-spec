@@ -10,11 +10,11 @@ Autoconf 2.69
 
 Move the repository contents for a directory like that:
 
-    /home/ec2-user/packaging/autoconf
+    /home/ec2-user/packaging/autoconf-rpm-spec
 
 And run rpmbuild:
 
-    cd /home/ec2-user/packaging/autoconf && rm -rf BUILDROOT/* BUILD/* RPMS/x86_64/* RPMS/noarch/* && cd SPECS/ && rpmbuild -ba --buildroot=/home/ec2-user/packaging/autoconf/BUILDROOT --define='_topdir /home/ec2-user/packaging/autoconf' --sign autoconf.spec
+    cd /home/ec2-user/packaging/autoconf-rpm-spec && rm -rf BUILDROOT/* BUILD/* RPMS/x86_64/* RPMS/noarch/* && cd SPECS/ && rpmbuild -ba --buildroot=/home/ec2-user/packaging/autoconf-rpm-spec/BUILDROOT --define='_topdir /home/ec2-user/packaging/autoconf-rpm-spec' --sign autoconf.spec
 
 # How to install?
 
